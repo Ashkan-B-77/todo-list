@@ -1,4 +1,4 @@
-# ToDo Application
+# To-Do Application
 
 This is a simple web application built with HTML, CSS and JS for a school assignment.
 
