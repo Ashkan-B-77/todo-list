@@ -42,7 +42,7 @@ function addTodoItem(){
             completedCount++; // increment the count variable by 1; if you click on an uncompleted list item.
         }
 
-        elNumOfCompletes.textContent = `${completedCount} completed`; // String template to show the number of completes in the chosen html placeholder.
+        elNumOfCompletes.textContent = completedCount; // Shows the number of completes in the chosen html placeholder.
     });
 
     elTaskInput.value = ""; // Clears the input after adding a task.
