@@ -1,30 +1,132 @@
-/* body style changes */
+/* body */
 body {
-    background-color: rgb(160, 160, 160);
-    color: rgb(0, 0, 0);
+    background-color: rgb(23, 23, 23);
+    color: rgb(223, 223, 223);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    border: 10px solid transparent; 
+    border-image: url("border.png") 10;
+}
+* {
+    box-sizing: border-box;
 }
 
-/* Main heading styles */
+/* main heading */
 h1 {
-    color: rgba(24, 24, 24, 0.5);
+    color: rgba(205, 205, 205, 0.7);
+    background: rgba(75, 78, 159, 0.314);
     text-align: center;
+    margin: 0;
+    padding: 10px;
 }
 
-/* add a half-transparent border under the heading, adjust its margins */
+/* <hr> */
 hr {
-    border: none;
-    border-top: 2px solid rgba(252, 252, 252, 0.5);
-    margin: 1rem 0;
+    margin: 0;
+    border-image: url("border.png") 10 round;
 }
 
-/* styles for completed tasks */
+/* list items */
+#taskList li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+    padding: 3px;        
+}
+
+/* list items (contents only) */
+#taskList li span {
+    cursor: pointer; /* make the text of the tasks have a pointer cursor, only applies to the text and not the full width of the page in front of the tasks */
+    padding: 4px;
+    margin: 4px;
+    border-radius: 5px 10px;
+}
+
+/* make the task items have zebra stripes */
+#taskList li:nth-child(odd) span {
+    background-color: rgba(77, 75, 159, 0.324);
+}
+#taskList li:nth-child(even) span {
+    background-color: rgba(75, 107, 159, 0.324);
+}
+
+/* delete button */
+.deleteBtn {
+    cursor: pointer;
+    background-color: rgb(55, 55, 55);
+    transition: 0.3s;
+    border-radius: 25px;
+    padding: 2px;
+}
+.deleteBtn:hover {
+    background-color:rgba(77, 75, 159, 0.7);
+    color: rgba(205, 205, 205, 0.9);
+}
+
+/* add task button */
+#addTaskBtn {
+    cursor: pointer;
+    transition: 0.3s;
+    background-color: rgb(55, 55, 55);
+    color: rgb(225, 225, 225);
+    padding: 2px 15px;
+    border-radius: 25px;
+}
+#addTaskBtn:hover {
+    background-color:rgba(77, 75, 159, 0.7);
+    color: rgba(205, 205, 205, 0.9);
+}
+
+/* task input box */
+#taskInput {
+    width: 20%;
+    background-color:rgb(43, 43, 43);
+    color: rgb(235, 235, 235);
+    border-radius: 5px;
+    padding: 2px;
+}
+
+/* completed list items */
 .completed {
     text-decoration: line-through;
-    color: rgb(93, 93, 93);
+    color: rgb(117, 116, 116);
 }
 
-/* make the warning message smaller and change its color */
+/* warning message */
 #warningMsg { 
     font-size: 0.85rem;
     color: red;
 }
+
+/* add a checkmark to list items */
+#taskList li::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border: 2px solid #555;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.completed::before {
+  background-color: #363636;
+  border-color: #292929;
+}
+/* adjust the left and top to position the checkmark */
+.completed::after {
+  content: "";
+  position: absolute;
+  left: 10px;   
+  top: 14px;
+  width: 5px;
+  height: 10px;
+  border: solid rgb(79, 176, 214);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  cursor: pointer;
+}
+
