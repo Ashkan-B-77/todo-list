@@ -3,24 +3,30 @@
         I've used the prefix "new" for variables that create elements within the DOM.
 */
 
-// ---------- Declaring the variables that hold the DOM elements ----------
+// -------------------- Declaring the variables that hold the DOM elements --------------------
 const elAddTaskBtn = document.querySelector("#addTaskBtn");
 const elTaskInput = document.querySelector("#taskInput");
 const elTaskList = document.querySelector("#taskList");
 const elWarningMsg = document.querySelector("#warningMsg");
 const elNumOfCompletes = document.querySelector("#numOfCompletes");
 
-// ---------- Declaring a variable for the section "completed..." ----------
+// -------------------- Declaring a variable for the section "completed..." --------------------
 let completedCount = 0; // Declare a variable for showing the number of completed tasks in an html placeholder, to be used in the "completed" section below.
 
-// ---------- Declaring variables for the section "adding list items to an array" ----------
+// -------------------- Declaring variables for the section "adding list items to an array" --------------------
 let taskData = []; // Creates an empty array variable that stores the list items as objects.
 let nextId = 1; // Creates a counter variable to give each list item a unique id.
 
 
 
-// ---------- The main function ----------
-elAddTaskBtn.addEventListener("click", addTodoItem); // Runs the function below if the task button is clicked.
+// -------------------- The main function --------------------
+elAddTaskBtn.addEventListener("click", addTodoItem); // Runs the function below if the "task button" is clicked.
+elTaskInput.addEventListener("keydown", function (event) { // Runs the function below also when you press enter in the taskInput. 
+    if (event.key === "Enter") { // only for the Enter key.
+        addTodoItem(); 
+    }
+});
+
 function addTodoItem(){
     const inputText = elTaskInput.value; // Creates a variable from the text in the html input, to be used later in the function.
 
@@ -46,7 +52,7 @@ function addTodoItem(){
     const newTask = {id: taskId, text: inputText, completed: false}; // creates an object holding the li data, id, text, and completed status.
     taskData.push(newTask); // adds the created object above to the end of the taskData array.
 
-    // ----- Adds the class name "completed" to list items that you click on. That class is styled in the CSS file -----    
+    // ----- Adds the class name "completed" to list items that you click on. That class is styled in the CSS file. Can also use "classList.toggle("completed")" here instead of "setAttribute" -----    
     newItemLabel.addEventListener("click", function () { // listens for clicks on the list items, runs the function below if clicked.
         if (newItem.getAttribute("class") == "completed") { // checks to see if class name "completed" is set on a list item.
             newItem.setAttribute("class", ""); // removes the class name "completed" from list items if you click on them again. Which then removes the styles.
@@ -57,7 +63,7 @@ function addTodoItem(){
             completedCount++; // increment the count variable by 1; if you click on an uncompleted list item.
         }
 
-        elNumOfCompletes.textContent = completedCount; // Shows the number of completes in the chosen html placeholder.
+        elNumOfCompletes.textContent = completedCount; // Shows the number of completes in the chosen html placeholder. (Could use string template here but I only need the "completedCount" variable here for my code).
 
         const matchingTask = taskData.find(task => task.id === taskId); // finds the object in taskData whose id matches this task's id.
         matchingTask.completed = !matchingTask.completed; // flips its completed boolean (true to false, false to true).
@@ -72,9 +78,9 @@ function addTodoItem(){
     newDeleteBtn.addEventListener("click", function () { // listens for clicks on the delete button.
         const matchingTask = taskData.find(task => task.id === taskId); // finds this task's object before it's removed (array function).
 
-        if (matchingTask.completed) { // if it was marked completed then:
+        if (matchingTask.completed) { // if it was marked completed then...
             completedCount--; // ...decrease the count, since it's about to be deleted.
-            elNumOfCompletes.textContent = completedCount; // update the displayed completed count number (could use string template here but i only need the "completedCount" variable here for my code).
+            elNumOfCompletes.textContent = completedCount; // update the displayed completed count number.
         }
 
         newItem.remove(); // removes the li from the shown item list.
